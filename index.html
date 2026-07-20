@@ -19,7 +19,7 @@ body {
     height: 100vh;
     height: 100dvh;
     font-family: 'Poppins', sans-serif;
-    background: #030810;
+    background: #06101e;
     overflow: hidden;
     padding: 0;
     margin: 0;
@@ -32,13 +32,35 @@ body {
 .bg {
     position: fixed;
     inset: 0;
-    background: #030810;
+    background: linear-gradient(180deg, #020610 0%, #040c1e 30%, #06142e 60%, #030a18 100%);
     z-index: 0;
+}
+.bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 50% at 50% 100%, rgba(8,30,60,0.6) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(15,45,90,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 30% at 80% 70%, rgba(10,40,80,0.3) 0%, transparent 60%);
+    animation: waterFlow 8s ease-in-out infinite alternate;
+}
+.bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background:
+        radial-gradient(ellipse 40% 20% at 30% 90%, rgba(20,55,110,0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 35% 15% at 70% 85%, rgba(12,45,90,0.2) 0%, transparent 70%);
+    animation: waterShimmer 6s ease-in-out infinite alternate-reverse;
 }
 
 .geo {
     position: absolute;
-    border: 1.5px solid rgba(244,208,63,0.12);
+    border: 1.5px solid rgba(60,120,200,0.08);
     border-radius: 20px;
     animation: geoFloat 10s ease-in-out infinite alternate;
 }
@@ -57,12 +79,17 @@ body {
     max-width: 420px;
     max-height: 780px;
     overflow: hidden;
-    background: rgba(10, 26, 56, 0.75);
-    border: 1px solid rgba(244,208,63,0.2);
-    border-radius: 20px;
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-    box-shadow: 0 0 60px rgba(244,208,63,0.06);
+    background: rgba(8,18,40,0.45);
+    border: 1px solid rgba(80,160,255,0.18);
+    border-radius: 30px;
+    backdrop-filter: blur(28px) saturate(1.3);
+    -webkit-backdrop-filter: blur(28px) saturate(1.3);
+    box-shadow:
+        0 0 40px rgba(40,120,255,0.12),
+        0 0 80px rgba(40,120,255,0.06),
+        0 16px 48px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(100,180,255,0.1),
+        inset 0 -1px 0 rgba(100,180,255,0.04);
     animation: fadeIn 0.8s ease forwards;
     display: flex;
     flex-direction: column;
@@ -70,14 +97,12 @@ body {
 .card::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background:
-        conic-gradient(from 0deg at 30% 40%, transparent 0deg, rgba(244,208,63,0.03) 60deg, transparent 120deg),
-        conic-gradient(from 180deg at 70% 60%, transparent 0deg, rgba(244,208,63,0.02) 60deg, transparent 120deg);
-    animation: canvasRotate 20s linear infinite;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(80,160,255,0.06) 0%, transparent 100%);
+    border-radius: 30px 30px 0 0;
     z-index: 0;
     pointer-events: none;
 }
@@ -86,18 +111,18 @@ body {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(circle at 30% 20%, rgba(244,208,63,0.04) 0%, transparent 40%),
-        radial-gradient(circle at 70% 80%, rgba(244,208,63,0.03) 0%, transparent 40%);
-    animation: canvasPulse 6s ease-in-out infinite alternate;
+        linear-gradient(135deg, rgba(80,160,255,0.04) 0%, transparent 40%, rgba(60,140,240,0.02) 100%);
+    animation: lightningGlow 3s ease-in-out infinite alternate;
     z-index: 0;
     pointer-events: none;
+    border-radius: 30px;
 }
 
 /* ── Top Header (Logo + Name + Title) ─────── */
 .card-top {
     text-align: center;
-    padding: 28px 30px 10px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 14px 30px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
     flex-shrink: 0;
     position: relative;
     z-index: 1;
@@ -106,8 +131,8 @@ body {
 .logo-k {
     width: 140px;
     height: 80px;
-    margin: 14px auto;
-    border: 2px solid rgba(244,208,63,0.3);
+    margin: 6px auto;
+    border: 1.5px solid rgba(212,172,75,0.25);
     border-radius: 16px;
     display: flex;
     align-items: center;
@@ -125,7 +150,7 @@ body {
     font-size: 1.4rem;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     letter-spacing: -0.3px;
 }
 
@@ -135,9 +160,9 @@ body {
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #F4D03F;
-    background: rgba(244,208,63,0.1);
-    border: 1px solid rgba(244,208,63,0.2);
+    color: #d4ac4b;
+    background: rgba(212,172,75,0.08);
+    border: 1px solid rgba(212,172,75,0.15);
     padding: 4px 14px;
     border-radius: 50px;
 }
@@ -145,7 +170,7 @@ body {
 /* ── Divider ──────────────────────────────── */
 .divider {
     height: 1px;
-    background: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.04);
     margin: 0 28px;
     flex-shrink: 0;
 }
@@ -161,22 +186,34 @@ body {
 }
 
 .section-label {
-    font-size: 0.72rem;
+    font-size: 0.65rem;
     font-weight: 600;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: #F4D03F;
-    padding: 8px 30px 4px;
-    display: flex;
+    color: #d4ac4b;
+    background: rgba(212,172,75,0.08);
+    border: 1px solid rgba(212,172,75,0.2);
+    padding: 4px 16px;
+    border-radius: 50px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
     flex-shrink: 0;
+    margin: 6px auto 2px;
+    box-shadow: 0 0 12px rgba(212,172,75,0.1);
 }
 .section-label i {
-    font-size: 0.72rem;
-    opacity: 0.7;
+    font-size: 0.65rem;
+    opacity: 1;
 }
+
+.label-phone { color: #25D366; background: rgba(37,211,102,0.08); border: 1px solid rgba(37,211,102,0.2); box-shadow: 0 0 12px rgba(37,211,102,0.1); }
+.label-phone i { color: #25D366; }
+.label-email { color: #EA4335; background: rgba(234,67,53,0.08); border: 1px solid rgba(234,67,53,0.2); box-shadow: 0 0 12px rgba(234,67,53,0.1); }
+.label-email i { color: #EA4335; }
+.label-location { color: #4285F4; background: rgba(66,133,244,0.08); border: 1px solid rgba(66,133,244,0.2); box-shadow: 0 0 12px rgba(66,133,244,0.1); }
+.label-location i { color: #4285F4; }
 
 .contact-section {
     padding: 0 16px 2px;
@@ -202,18 +239,44 @@ body {
     height: 40px;
     min-width: 40px;
     border-radius: 10px;
-    background: rgba(244,208,63,0.08);
-    border: 1px solid rgba(244,208,63,0.1);
+    background: rgba(212,172,75,0.08);
+    border: 1px solid rgba(212,172,75,0.1);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #F4D03F;
+    color: #d4ac4b;
     font-size: 0.85rem;
     transition: all 0.25s ease;
 }
-.contact-row:hover .contact-icon {
-    background: #F4D03F;
-    color: #10284D;
+
+.icon-phone {
+    background: rgba(37,211,102,0.1);
+    border: 1px solid rgba(37,211,102,0.2);
+    color: #25D366;
+}
+.contact-row:hover .icon-phone {
+    background: #25D366;
+    color: #fff;
+}
+
+.icon-email {
+    background: rgba(234,67,53,0.1);
+    border: 1px solid rgba(234,67,53,0.2);
+    color: #EA4335;
+}
+.contact-row:hover .icon-email {
+    background: #EA4335;
+    color: #fff;
+}
+
+.icon-location {
+    background: rgba(66,133,244,0.1);
+    border: 1px solid rgba(66,133,244,0.2);
+    color: #4285F4;
+}
+.contact-row:hover .icon-location {
+    background: #4285F4;
+    color: #fff;
 }
 
 .contact-info {
@@ -242,7 +305,7 @@ body {
 }
 
 .actions {
-    padding: 6px 24px 4px;
+    padding: 6px 24px 16px;
     display: flex;
     justify-content: center;
 }
@@ -266,55 +329,108 @@ body {
 }
 
 .btn-gold {
-    background: #F4D03F;
-    color: #10284D;
-    box-shadow: 0 4px 16px rgba(244,208,63,0.25);
+    background: #d4ac4b;
+    color: #0f1420;
+    box-shadow: 0 0 20px rgba(212,172,75,0.3), 0 4px 16px rgba(212,172,75,0.15);
 }
 .btn-gold:hover {
-    background: #e6c436;
+    background: #c49a3a;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(244,208,63,0.4);
-    color: #10284D;
+    box-shadow: 0 0 28px rgba(212,172,75,0.45), 0 8px 24px rgba(212,172,75,0.2);
+    color: #0f1420;
 }
 
 .btn-outline {
     background: transparent;
-    color: #F4D03F;
-    border: 1.5px solid rgba(244,208,63,0.3);
+    color: #d4ac4b;
+    border: 1.5px solid rgba(212,172,75,0.3);
 }
 .btn-outline:hover {
-    background: rgba(244,208,63,0.1);
-    border-color: #F4D03F;
+    background: rgba(212,172,75,0.1);
+    border-color: #d4ac4b;
     transform: translateY(-2px);
-    color: #F4D03F;
+    color: #d4ac4b;
 }
 
 .socials {
-    padding: 2px 24px 10px;
+    padding: 12px 24px 10px;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 14px;
 }
 
 .social-link {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-    border: 1px solid rgba(244,208,63,0.25);
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255,255,255,0.45);
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     text-decoration: none;
     transition: all 0.3s ease;
+    color: #fff;
 }
 .social-link:hover {
-    background: #F4D03F;
-    color: #10284D;
-    border-color: #F4D03F;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(244,208,63,0.3);
+    transform: translateY(-3px);
+}
+.social-whatsapp:hover {
+    box-shadow: 0 0 20px rgba(37,211,102,0.4);
+}
+.social-instagram:hover {
+    box-shadow: 0 0 20px rgba(225,48,108,0.4);
+}
+.social-facebook:hover {
+    box-shadow: 0 0 20px rgba(66,103,178,0.4);
+}
+.social-tiktok:hover {
+    box-shadow: 0 0 20px rgba(37,244,238,0.4);
+}
+
+.social-whatsapp {
+    background: rgba(37,211,102,0.15);
+    color: #25D366;
+    border: 1.5px solid rgba(37,211,102,0.3);
+}
+.social-whatsapp:hover {
+    background: #25D366;
+    color: #fff;
+    border-color: #25D366;
+}
+
+.social-instagram {
+    background: rgba(225,48,108,0.15);
+    color: #E1306C;
+    border: 1.5px solid rgba(225,48,108,0.3);
+}
+.social-instagram:hover {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: #fff;
+    border-color: #dc2743;
+}
+
+.social-facebook {
+    background: rgba(66,103,178,0.15);
+    color: #4267B2;
+    border: 1.5px solid rgba(66,103,178,0.3);
+}
+.social-facebook:hover {
+    background: #4267B2;
+    color: #fff;
+    border-color: #4267B2;
+}
+
+.social-tiktok {
+    background: rgba(0,0,0,0.2);
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.15);
+}
+.social-tiktok:hover {
+    background: #010101;
+    color: #fff;
+    border-color: #25F4EE;
+    box-shadow: 0 0 12px rgba(37,244,238,0.3);
 }
 
 /* ── Footer (removed) ─────────────────────── */
@@ -324,72 +440,72 @@ body {
    ═══════════════════════════════════════════ */
 
 @media (max-width: 480px) {
-    .card { max-width: none; max-height: none; border-radius: 0; background: rgba(10, 26, 56, 0.80); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
-    .card-top { padding: 22px 24px 10px; }
-    .logo-k { width: 120px; height: 70px; margin: 12px auto; }
+    .card { max-width: none; max-height: none; border-radius: 0; background: rgba(8,18,40,0.45); backdrop-filter: blur(28px) saturate(1.3); -webkit-backdrop-filter: blur(28px) saturate(1.3); }
+    .card-top { padding: 22px 24px 8px; }
+    .logo-k { width: 120px; height: 70px; margin: 4px auto; }
     .person-name { font-size: 1.1rem; margin-bottom: 6px; }
     .person-title { font-size: 0.65rem; padding: 3px 12px; }
-    .section-label { padding: 6px 24px 3px; font-size: 0.65rem; }
+    .section-label { padding: 3px 14px; font-size: 0.58rem; }
     .contact-section { padding: 0 12px 1px; }
     .contact-row { padding: 6px 8px; gap: 10px; }
     .contact-icon { width: 36px; height: 36px; min-width: 36px; font-size: 0.78rem; }
     .contact-value { font-size: 0.82rem; }
     .contact-value-sm { font-size: 0.7rem; }
-    .actions { padding: 4px 20px 3px; }
+    .actions { padding: 4px 20px 12px; }
     .btn { padding: 10px 12px; font-size: 0.8rem; }
-    .socials { padding: 2px 20px 8px; gap: 8px; }
-    .social-link { width: 46px; height: 46px; font-size: 1.1rem; }
+    .socials { padding: 10px 20px 8px; gap: 10px; }
+    .social-link { width: 52px; height: 52px; font-size: 1.35rem; border-radius: 14px; }
 }
 
 @media (max-width: 359px) {
-    .card-top { padding: 18px 18px 8px; }
-    .logo-k { width: 100px; height: 60px; margin: 10px auto; }
+    .card-top { padding: 18px 18px 6px; }
+    .logo-k { width: 100px; height: 60px; margin: 4px auto; }
     .person-name { font-size: 1rem; }
     .person-title { font-size: 0.6rem; padding: 3px 10px; }
     .divider { margin: 0 18px; }
-    .section-label { padding: 6px 18px 3px; font-size: 0.58rem; }
+    .section-label { padding: 3px 12px; font-size: 0.52rem; }
     .contact-section { padding: 0 10px 1px; }
     .contact-row { padding: 5px 6px; gap: 8px; }
     .contact-icon { width: 32px; height: 32px; min-width: 32px; font-size: 0.72rem; border-radius: 8px; }
     .contact-value { font-size: 0.78rem; }
     .contact-value-sm { font-size: 0.66rem; }
-    .actions { padding: 3px 16px 3px; }
+    .actions { padding: 3px 16px 12px; }
     .btn { padding: 9px 10px; font-size: 0.75rem; }
-    .socials { padding: 2px 16px 7px; gap: 6px; }
-    .social-link { width: 42px; height: 42px; font-size: 0.95rem; border-radius: 10px; }
+    .socials { padding: 10px 16px 7px; gap: 8px; }
+    .social-link { width: 46px; height: 46px; font-size: 1.15rem; border-radius: 12px; }
 }
 
 @media (max-height: 700px) {
-    .card-top { padding: 18px 24px 8px; }
-    .logo-k { width: 110px; height: 65px; margin: 10px auto; }
+    .card-top { padding: 14px 24px 6px; }
+    .logo-k { width: 110px; height: 65px; margin: 4px auto; }
     .person-name { font-size: 1.05rem; margin-bottom: 6px; }
     .person-title { font-size: 0.62rem; padding: 3px 12px; }
-    .section-label { padding: 7px 24px 3px; }
+    .section-label { padding: 3px 14px; }
     .contact-row { padding: 5px 8px; }
     .contact-icon { width: 36px; height: 36px; min-width: 36px; font-size: 0.78rem; }
     .contact-value { font-size: 0.82rem; }
     .contact-value-sm { font-size: 0.7rem; }
-    .actions { padding: 3px 22px 3px; }
+    .actions { padding: 3px 22px 12px; }
     .btn { padding: 9px 12px; font-size: 0.8rem; }
-    .socials { padding: 2px 22px 8px; }
-    .social-link { width: 46px; height: 46px; font-size: 1.1rem; }
+    .socials { padding: 10px 22px 8px; }
+    .social-link { width: 50px; height: 50px; font-size: 1.3rem; }
 }
 
 @media (max-height: 580px) {
-    .card-top { padding: 14px 20px 6px; }
-    .logo-k { width: 95px; height: 55px; margin: 8px auto; }
+    .card-top { padding: 10px 20px 4px; }
+    .logo-k { width: 95px; height: 55px; margin: 3px auto; }
     .person-name { font-size: 0.95rem; margin-bottom: 5px; }
     .person-title { font-size: 0.58rem; padding: 2px 10px; }
-    .section-label { padding: 5px 20px 2px; font-size: 0.56rem; }
+    .section-label { padding: 2px 12px; font-size: 0.5rem; }
     .contact-section { padding: 0 8px 1px; }
     .contact-row { padding: 4px 6px; gap: 7px; }
     .contact-icon { width: 30px; height: 30px; min-width: 30px; font-size: 0.7rem; border-radius: 7px; }
     .contact-value { font-size: 0.76rem; }
     .contact-value-sm { font-size: 0.64rem; }
-    .actions { padding: 3px 18px 3px; gap: 6px; }
+    .actions { padding: 3px 18px 10px; gap: 6px; }
     .btn { padding: 8px 10px; font-size: 0.75rem; }
-    .socials { padding: 2px 18px 6px; gap: 6px; }
-    .social-link { width: 40px; height: 40px; font-size: 0.95rem; }
+    .socials { padding: 8px 18px 6px; gap: 8px; }
+    .social-link { width: 44px; height: 44px; font-size: 1.1rem; }
 }
 
 @keyframes fadeIn {
@@ -402,14 +518,27 @@ body {
     100% { transform: rotate(35deg) translate(15px, -10px); opacity: 0.8; }
 }
 
-@keyframes canvasRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+@keyframes waterFlow {
+    0% { transform: translateX(0) translateY(0); }
+    100% { transform: translateX(-3%) translateY(-2%); }
 }
 
-@keyframes canvasPulse {
-    0% { opacity: 0.5; }
-    100% { opacity: 1; }
+@keyframes waterShimmer {
+    0% { transform: translateX(0); opacity: 0.6; }
+    100% { transform: translateX(-5%); opacity: 1; }
+}
+
+@keyframes lightningGlow {
+    0% { opacity: 0.3; }
+    30% { opacity: 0.8; }
+    32% { opacity: 0.2; }
+    35% { opacity: 0.9; }
+    37% { opacity: 0.3; }
+    60% { opacity: 0.4; }
+    65% { opacity: 1; }
+    67% { opacity: 0.2; }
+    70% { opacity: 0.7; }
+    100% { opacity: 0.4; }
 }
     </style>
 </head>
@@ -435,24 +564,24 @@ body {
     <div class="contacts-wrapper">
 
         <!-- Phone -->
-        <div class="section-label">
-            <i class="fas fa-phone-alt"></i> Phone
+        <div class="section-label label-phone">
+            Phone <i class="fas fa-phone-alt"></i>
         </div>
         <div class="contact-section">
             <a href="tel:01000729175" class="contact-row">
-                <div class="contact-icon"><i class="fas fa-mobile-alt"></i></div>
+                <div class="contact-icon icon-phone"><i class="fas fa-mobile-alt"></i></div>
                 <div class="contact-info">
                     <span class="contact-value">010 0072 9175</span>
                 </div>
             </a>
             <a href="tel:01060116936" class="contact-row">
-                <div class="contact-icon"><i class="fas fa-mobile-alt"></i></div>
+                <div class="contact-icon icon-phone"><i class="fas fa-mobile-alt"></i></div>
                 <div class="contact-info">
                     <span class="contact-value">010 6011 6936</span>
                 </div>
             </a>
             <a href="tel:034871773" class="contact-row">
-                <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                <div class="contact-icon icon-phone"><i class="fas fa-phone-alt"></i></div>
                 <div class="contact-info">
                     <span class="contact-value">03-4871773</span>
                 </div>
@@ -462,18 +591,18 @@ body {
         <div class="divider"></div>
 
         <!-- Email -->
-        <div class="section-label">
-            <i class="fas fa-envelope"></i> Email
+        <div class="section-label label-email">
+            Email <i class="fas fa-envelope"></i>
         </div>
         <div class="contact-section">
             <a href="mailto:kamcoforcontrolandeletricalpo@gmail.com" class="contact-row">
-                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <div class="contact-icon icon-email"><i class="fas fa-envelope"></i></div>
                 <div class="contact-info">
                     <span class="contact-value contact-value-sm">kamcoforcontrolandeletricalpo@gmail.com</span>
                 </div>
             </a>
             <a href="mailto:Kareemosma95@gmail.com" class="contact-row">
-                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <div class="contact-icon icon-email"><i class="fas fa-envelope"></i></div>
                 <div class="contact-info">
                     <span class="contact-value contact-value-sm">Kareemosma95@gmail.com</span>
                 </div>
@@ -483,12 +612,12 @@ body {
         <div class="divider"></div>
 
         <!-- Address -->
-        <div class="section-label">
-            <i class="fas fa-map-marker-alt"></i> Address
+        <div class="section-label label-location">
+            Address <i class="fas fa-map-marker-alt"></i>
         </div>
         <div class="contact-section">
             <a href="https://maps.google.com/?q=16+Al+Sab+Banat+Street+Al-Manshia+Alexandria+Egypt" target="_blank" rel="noopener noreferrer" class="contact-row">
-                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="contact-icon icon-location"><i class="fas fa-map-marker-alt"></i></div>
                 <div class="contact-info">
                     <span class="contact-value contact-value-sm">16 Al Sab' Banat St, Al-Manshia, Alexandria, Egypt</span>
                 </div>
@@ -499,21 +628,19 @@ body {
 
     <!-- Bottom: Socials + Button -->
     <div class="card-bottom">
+        <div class="divider"></div>
         <div class="socials">
-            <a href="https://wa.me/201000729175" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp">
+            <a href="https://wa.me/201000729175" target="_blank" rel="noopener noreferrer" class="social-link social-whatsapp" aria-label="WhatsApp">
                 <i class="fab fa-whatsapp"></i>
             </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+            <a href="https://www.instagram.com/kamco.systemsandelectrical?igsh=dmY3eGk4emJ0cXhn" target="_blank" rel="noopener noreferrer" class="social-link social-instagram" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61566581117201" target="_blank" rel="noopener noreferrer" class="social-link social-facebook" aria-label="Facebook">
                 <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a href="mailto:kamcoforcontrolandeletricalpo@gmail.com" class="social-link" aria-label="Email">
-                <i class="fas fa-envelope"></i>
-            </a>
-            <a href="https://maps.google.com/?q=16+Al+Sab+Banat+Street+Al-Manshia+Alexandria+Egypt" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Location">
-                <i class="fas fa-map-marker-alt"></i>
+            <a href="https://www.tiktok.com/@kamco_electric118" target="_blank" rel="noopener noreferrer" class="social-link social-tiktok" aria-label="TikTok">
+                <i class="fab fa-tiktok"></i>
             </a>
         </div>
         <div class="actions">
