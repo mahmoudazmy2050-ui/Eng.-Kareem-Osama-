@@ -93,6 +93,7 @@ body {
     animation: fadeIn 0.8s ease forwards;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
 }
 .card::before {
     content: '';
@@ -121,7 +122,7 @@ body {
 /* ── Top Header (Logo + Name + Title) ─────── */
 .card-top {
     text-align: center;
-    padding: 14px 30px 8px;
+    padding: 14px 30px 4px;
     border-bottom: 1px solid rgba(60,140,240,0.08);
     flex-shrink: 0;
     position: relative;
@@ -140,6 +141,7 @@ body {
     box-shadow: 0 0 16px rgba(212,172,75,0.08);
     position: relative;
     overflow: hidden;
+    animation: logoEntrance 0.8s ease-out forwards;
 }
 .logo-k::after {
     content: '';
@@ -345,7 +347,7 @@ body {
 }
 
 .actions {
-    padding: 6px 24px 16px;
+    padding: 6px 24px 8px;
     display: flex;
     justify-content: center;
 }
@@ -393,7 +395,7 @@ body {
 }
 
 .socials {
-    padding: 12px 24px 10px;
+    padding: 4px 24px 10px;
     display: flex;
     justify-content: center;
     gap: 14px;
@@ -481,72 +483,69 @@ body {
 
 @media (max-width: 480px) {
     .card { max-width: none; max-height: none; border-radius: 0; background: rgba(8,18,40,0.2); backdrop-filter: blur(36px) saturate(1.6); -webkit-backdrop-filter: blur(36px) saturate(1.6); }
-    .card-top { padding: 16px 20px 6px; }
-    .logo-k { width: 110px; height: 65px; margin: 3px auto; }
-    .person-name { font-size: 1.05rem; margin-bottom: 4px; }
+    .card-top { padding: 16px 20px 4px; }
+    .logo-k { width: 110px; height: 65px; margin: 2px auto; }
+    .person-name { font-size: 1.05rem; margin-bottom: 2px; }
     .person-title { font-size: 0.6rem; padding: 3px 12px; }
-    .section-label { padding: 3px 14px; font-size: 0.55rem; margin: 8px auto 3px; }
-    .contact-section { padding: 0 12px 1px; }
-    .contact-row { padding: 5px 8px; gap: 10px; }
+    .section-label { padding: 3px 14px; font-size: 0.55rem; margin: 6px auto 2px; }
+    .contact-section { padding: 0 12px 0; }
+    .contact-row { padding: 4px 8px; gap: 10px; }
     .contact-icon { width: 34px; height: 34px; min-width: 34px; font-size: 0.75rem; }
     .contact-value { font-size: 0.8rem; }
-    .contact-value-sm { font-size: 0.68rem; }
     .divider { margin: 0 20px; }
-    .actions { padding: 3px 20px 10px; }
+    .actions { padding: 2px 20px 4px; }
     .btn { padding: 9px 12px; font-size: 0.78rem; }
-    .socials { padding: 8px 20px 6px; gap: 8px; }
+    .socials { padding: 2px 20px 6px; gap: 8px; }
     .social-link { width: 48px; height: 48px; font-size: 1.25rem; border-radius: 12px; }
 }
 
 @media (max-width: 359px) {
-    .card-top { padding: 14px 14px 4px; }
+    .card-top { padding: 12px 14px 2px; }
     .logo-k { width: 90px; height: 55px; margin: 2px auto; }
-    .person-name { font-size: 0.92rem; margin-bottom: 3px; }
+    .person-name { font-size: 0.92rem; margin-bottom: 2px; }
     .person-title { font-size: 0.55rem; padding: 2px 10px; }
-    .divider { margin: 0 14px; }
-    .section-label { padding: 2px 10px; font-size: 0.48rem; margin: 6px auto 2px; }
-    .contact-section { padding: 0 8px 1px; }
-    .contact-row { padding: 4px 6px; gap: 7px; }
+    .section-label { padding: 2px 10px; font-size: 0.48rem; margin: 4px auto 2px; }
+    .contact-section { padding: 0 8px 0; }
+    .contact-row { padding: 3px 6px; gap: 7px; }
     .contact-icon { width: 28px; height: 28px; min-width: 28px; font-size: 0.65rem; border-radius: 7px; }
     .contact-value { font-size: 0.72rem; }
-    .contact-value-sm { font-size: 0.62rem; }
-    .actions { padding: 2px 14px 8px; }
+    .divider { margin: 0 14px; }
+    .actions { padding: 2px 14px 2px; }
     .btn { padding: 8px 10px; font-size: 0.7rem; }
-    .socials { padding: 6px 14px 5px; gap: 6px; }
+    .socials { padding: 2px 14px 4px; gap: 6px; }
     .social-link { width: 40px; height: 40px; font-size: 1.05rem; border-radius: 10px; }
 }
 
 @media (max-height: 700px) {
-    .card-top { padding: 14px 24px 6px; }
-    .logo-k { width: 110px; height: 65px; margin: 4px auto; }
-    .person-name { font-size: 1.05rem; margin-bottom: 6px; }
+    .card-top { padding: 12px 24px 4px; }
+    .logo-k { width: 110px; height: 65px; margin: 2px auto; }
+    .person-name { font-size: 1.05rem; margin-bottom: 2px; }
     .person-title { font-size: 0.62rem; padding: 3px 12px; }
-    .section-label { padding: 3px 14px; }
-    .contact-row { padding: 5px 8px; }
-    .contact-icon { width: 36px; height: 36px; min-width: 36px; font-size: 0.78rem; }
+    .section-label { padding: 3px 14px; margin: 6px auto 2px; }
+    .contact-row { padding: 4px 8px; }
+    .contact-icon { width: 34px; height: 34px; min-width: 34px; font-size: 0.75rem; }
     .contact-value { font-size: 0.82rem; }
-    .contact-value-sm { font-size: 0.7rem; }
-    .actions { padding: 3px 22px 12px; }
+    .actions { padding: 2px 22px 4px; }
     .btn { padding: 9px 12px; font-size: 0.8rem; }
-    .socials { padding: 10px 22px 8px; }
-    .social-link { width: 50px; height: 50px; font-size: 1.3rem; }
+    .socials { padding: 2px 22px 6px; }
+    .social-link { width: 48px; height: 48px; font-size: 1.25rem; }
 }
 
 @media (max-height: 580px) {
-    .card-top { padding: 10px 20px 4px; }
-    .logo-k { width: 95px; height: 55px; margin: 3px auto; }
-    .person-name { font-size: 0.95rem; margin-bottom: 5px; }
-    .person-title { font-size: 0.58rem; padding: 2px 10px; }
-    .section-label { padding: 2px 12px; font-size: 0.5rem; }
-    .contact-section { padding: 0 8px 1px; }
-    .contact-row { padding: 4px 6px; gap: 7px; }
-    .contact-icon { width: 30px; height: 30px; min-width: 30px; font-size: 0.7rem; border-radius: 7px; }
-    .contact-value { font-size: 0.76rem; }
-    .contact-value-sm { font-size: 0.64rem; }
-    .actions { padding: 3px 18px 10px; gap: 6px; }
-    .btn { padding: 8px 10px; font-size: 0.75rem; }
-    .socials { padding: 8px 18px 6px; gap: 8px; }
-    .social-link { width: 44px; height: 44px; font-size: 1.1rem; }
+    .card-top { padding: 8px 20px 2px; }
+    .logo-k { width: 90px; height: 55px; margin: 2px auto; }
+    .person-name { font-size: 0.92rem; margin-bottom: 2px; }
+    .person-title { font-size: 0.55rem; padding: 2px 10px; }
+    .section-label { padding: 2px 12px; font-size: 0.5rem; margin: 4px auto 2px; }
+    .contact-section { padding: 0 8px 0; }
+    .contact-row { padding: 3px 6px; gap: 6px; }
+    .contact-icon { width: 28px; height: 28px; min-width: 28px; font-size: 0.65rem; border-radius: 7px; }
+    .contact-value { font-size: 0.74rem; }
+    .contact-value-sm { font-size: 0.62rem; }
+    .actions { padding: 1px 18px 2px; gap: 6px; }
+    .btn { padding: 7px 10px; font-size: 0.72rem; }
+    .socials { padding: 2px 18px 4px; gap: 6px; }
+    .social-link { width: 40px; height: 40px; font-size: 1.05rem; }
 }
 
 @keyframes fadeIn {
@@ -620,7 +619,7 @@ body {
 
         <!-- Phone -->
         <div class="section-label label-phone">
-            Phones <i class="fas fa-phone-alt"></i>
+            Phone <i class="fas fa-phone-alt"></i>
         </div>
         <div class="contact-section">
             <div class="contact-row contact-row-static">
@@ -642,7 +641,7 @@ body {
 
         <!-- Email -->
         <div class="section-label label-email">
-            Emails <i class="fas fa-envelope"></i>
+            Email <i class="fas fa-envelope"></i>
         </div>
         <div class="contact-section">
             <a href="mailto:kamcoforcontrolandeletricalpo@gmail.com" class="contact-row">
