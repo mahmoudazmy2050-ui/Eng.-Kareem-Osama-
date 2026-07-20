@@ -28,15 +28,6 @@ body {
     overflow: hidden;
 }
 
-#particles-canvas {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
 /* ═══════════════════════════════════════════
    CARD
    ═══════════════════════════════════════════ */
@@ -101,16 +92,19 @@ body {
 /* ── Top Header (Logo + Name + Title) ─────── */
 .card-top {
     text-align: center;
-    padding: 14px 30px 4px;
+    padding: 18px 30px 8px;
     flex-shrink: 0;
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
 .logo-k {
     width: 140px;
     height: 80px;
-    margin: 6px auto;
+    margin: 0 auto;
     border: 1.5px solid rgba(60,200,255,0.35);
     border-radius: 16px;
     display: flex;
@@ -149,10 +143,15 @@ body {
     margin-bottom: 4px;
     letter-spacing: -0.3px;
     text-shadow: 0 0 12px rgba(80,200,255,0.3);
+    text-decoration: underline;
+    text-decoration-color: rgba(60,200,255,0.4);
+    text-underline-offset: 10px;
 }
 
 .person-title {
     display: inline-block;
+    width: fit-content;
+    margin: 0 auto;
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 2px;
@@ -576,8 +575,6 @@ body {
 </head>
 <body>
 
-<canvas id="particles-canvas"></canvas>
-
 <div class="card">
     <canvas id="card-particles-canvas"></canvas>
 
@@ -687,7 +684,7 @@ body {
         'rgba(80,140,255,'
     ];
 
-    function createParticleSystem(canvasId, count, speed, glow) {
+    function createParticleSystem(canvasId, count, speed, glow, maxAlpha) {
         var canvas = document.getElementById(canvasId);
         var ctx = canvas.getContext('2d');
         var W, H;
@@ -704,18 +701,18 @@ body {
         P.prototype.reset = function() {
             this.x = Math.random() * W;
             this.y = Math.random() * H;
-            this.r = Math.random() * 2.5 + 0.8;
+            this.r = Math.random() * 2 + 0.5;
             this.vx = (Math.random() - 0.5) * speed;
             this.vy = (Math.random() - 0.5) * speed;
             this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
-            this.alpha = Math.random() * 0.55 + 0.1;
-            this.alphaDir = (Math.random() - 0.5) * 0.006;
+            this.alpha = Math.random() * maxAlpha + 0.05;
+            this.alphaDir = (Math.random() - 0.5) * 0.003;
         };
         P.prototype.update = function() {
             this.x += this.vx;
             this.y += this.vy;
             this.alpha += this.alphaDir;
-            if (this.alpha <= 0.05 || this.alpha >= 0.6) this.alphaDir *= -1;
+            if (this.alpha <= 0.03 || this.alpha >= maxAlpha) this.alphaDir *= -1;
             if (this.x < -10) this.x = W + 10;
             if (this.x > W + 10) this.x = -10;
             if (this.y < -10) this.y = H + 10;
@@ -728,7 +725,7 @@ body {
             ctx.fill();
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.r * glow, 0, Math.PI * 2);
-            ctx.fillStyle = this.color + (this.alpha * 0.18) + ')';
+            ctx.fillStyle = this.color + (this.alpha * 0.12) + ')';
             ctx.fill();
         };
 
@@ -745,12 +742,9 @@ body {
         animate();
     }
 
-    var bgCount = Math.min(80, Math.floor((window.innerWidth * window.innerHeight) / 12000));
-    createParticleSystem('particles-canvas', bgCount, 0.4, 3);
-
     var cardEl = document.querySelector('.card');
-    var cardCount = Math.min(30, Math.floor((cardEl.clientWidth * cardEl.clientHeight) / 10000));
-    createParticleSystem('card-particles-canvas', cardCount, 0.3, 3.5);
+    var cardCount = Math.min(18, Math.floor((cardEl.clientWidth * cardEl.clientHeight) / 14000));
+    createParticleSystem('card-particles-canvas', cardCount, 0.12, 3, 0.3);
 })();
 </script>
 
