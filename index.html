@@ -25,9 +25,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
-
+#particles-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
 
 /* ═══════════════════════════════════════════
    CARD
@@ -41,51 +49,59 @@ body {
     max-width: 420px;
     max-height: 780px;
     overflow: hidden;
-    background: rgba(255,255,255,0.03);
-    border: 2px solid rgba(212,172,75,0.35);
+    background: rgba(8,18,40,0.35);
+    border: 2px solid rgba(60,200,255,0.4);
     border-radius: 30px;
-    backdrop-filter: blur(50px) saturate(2);
-    -webkit-backdrop-filter: blur(50px) saturate(2);
+    backdrop-filter: blur(35px) saturate(1.5);
+    -webkit-backdrop-filter: blur(35px) saturate(1.5);
     box-shadow:
-        0 0 30px rgba(40,120,255,0.1),
-        0 0 60px rgba(40,120,255,0.05),
-        0 8px 24px rgba(0,0,0,0.25),
-        inset 0 1px 0 rgba(100,180,255,0.08),
-        inset 0 -1px 0 rgba(100,180,255,0.04);
-    animation: fadeIn 0.8s ease forwards;
+        0 0 30px rgba(60,200,255,0.25),
+        0 0 60px rgba(60,200,255,0.1),
+        0 8px 32px rgba(0,0,0,0.3),
+        inset 0 0 40px rgba(60,200,255,0.03);
+    animation: fadeIn 0.8s ease forwards, borderGlow 4s ease-in-out infinite alternate;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
+#card-particles-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-radius: 30px;
+}
+
 .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(135deg, rgba(60,200,255,0.06) 0%, transparent 40%, rgba(40,160,255,0.03) 100%);
+    animation: neonPulse 4s ease-in-out infinite alternate;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: 30px;
+}
+.card::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 50%;
-    background: linear-gradient(180deg, rgba(80,160,255,0.06) 0%, transparent 100%);
+    background: linear-gradient(180deg, rgba(60,200,255,0.08) 0%, transparent 100%);
+    z-index: 0;
+    pointer-events: none;
     border-radius: 30px 30px 0 0;
-    z-index: 0;
-    pointer-events: none;
-}
-.card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(135deg, rgba(80,160,255,0.04) 0%, transparent 40%, rgba(60,140,240,0.02) 100%);
-    animation: lightningGlow 3s ease-in-out infinite alternate;
-    z-index: 0;
-    pointer-events: none;
-    border-radius: 30px;
 }
 
 /* ── Top Header (Logo + Name + Title) ─────── */
 .card-top {
     text-align: center;
     padding: 14px 30px 4px;
-    border-bottom: 1px solid rgba(60,140,240,0.08);
     flex-shrink: 0;
     position: relative;
     z-index: 2;
@@ -95,12 +111,12 @@ body {
     width: 140px;
     height: 80px;
     margin: 6px auto;
-    border: 1.5px solid rgba(212,172,75,0.3);
+    border: 1.5px solid rgba(60,200,255,0.35);
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 16px rgba(212,172,75,0.08);
+    box-shadow: 0 0 10px rgba(60,200,255,0.08), 0 0 20px rgba(60,200,255,0.04);
     position: relative;
     overflow: hidden;
     animation: logoEntrance 0.8s ease-out forwards;
@@ -129,9 +145,10 @@ body {
 .person-name {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #e8edf5;
+    color: #e8f0ff;
     margin-bottom: 4px;
     letter-spacing: -0.3px;
+    text-shadow: 0 0 12px rgba(80,200,255,0.3);
 }
 
 .person-title {
@@ -140,20 +157,21 @@ body {
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #d4ac4b;
-    background: rgba(212,172,75,0.08);
-    border: 1px solid rgba(212,172,75,0.2);
+    color: #80d4ff;
+    background: rgba(60,200,255,0.06);
+    border: 1px solid rgba(60,200,255,0.2);
     padding: 4px 14px;
     border-radius: 50px;
-    box-shadow: 0 0 12px rgba(212,172,75,0.06);
+    box-shadow: 0 0 15px rgba(60,200,255,0.1);
 }
 
 /* ── Divider ──────────────────────────────── */
 .divider {
     height: 1px;
-    background: rgba(212,172,75,0.25);
+    background: rgba(60,200,255,0.25);
     margin: 0 28px;
     flex-shrink: 0;
+    box-shadow: 0 0 4px rgba(60,200,255,0.1);
 }
 
 /* ── Contacts Area (fills middle) ─────────── */
@@ -171,9 +189,9 @@ body {
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #d4ac4b;
-    background: rgba(212,172,75,0.06);
-    border: 1px solid rgba(212,172,75,0.2);
+    color: #80d4ff;
+    background: rgba(60,200,255,0.05);
+    border: 1px solid rgba(60,200,255,0.2);
     padding: 4px 16px;
     border-radius: 50px;
     display: inline-flex;
@@ -182,18 +200,18 @@ body {
     gap: 6px;
     flex-shrink: 0;
     margin: 10px auto 4px;
-    box-shadow: 0 0 12px rgba(212,172,75,0.08);
+    box-shadow: 0 0 6px rgba(60,200,255,0.05);
 }
 .section-label i {
     font-size: 0.65rem;
     opacity: 1;
 }
 
-.label-phone { color: #25D366; background: rgba(37,211,102,0.06); border: 1px solid rgba(37,211,102,0.2); box-shadow: 0 0 12px rgba(37,211,102,0.08); }
+.label-phone { color: #25D366; background: rgba(37,211,102,0.06); border: 1px solid rgba(37,211,102,0.25); box-shadow: 0 0 8px rgba(37,211,102,0.06); }
 .label-phone i { color: #25D366; }
-.label-email { color: #EA4335; background: rgba(234,67,53,0.06); border: 1px solid rgba(234,67,53,0.2); box-shadow: 0 0 12px rgba(234,67,53,0.08); }
+.label-email { color: #EA4335; background: rgba(234,67,53,0.06); border: 1px solid rgba(234,67,53,0.25); box-shadow: 0 0 8px rgba(234,67,53,0.06); }
 .label-email i { color: #EA4335; }
-.label-location { color: #4285F4; background: rgba(66,133,244,0.06); border: 1px solid rgba(66,133,244,0.2); box-shadow: 0 0 12px rgba(66,133,244,0.08); }
+.label-location { color: #4285F4; background: rgba(66,133,244,0.06); border: 1px solid rgba(66,133,244,0.25); box-shadow: 0 0 8px rgba(66,133,244,0.06); }
 .label-location i { color: #4285F4; }
 
 .contact-section {
@@ -220,6 +238,7 @@ body {
 }
 .contact-info-duo .contact-value:hover {
     color: #25D366;
+    text-shadow: 0 0 10px rgba(37,211,102,0.4);
 }
 
 .contact-sep {
@@ -256,6 +275,7 @@ body {
     color: #5a9eff;
     font-size: 0.85rem;
     transition: all 0.25s ease;
+    box-shadow: 0 0 6px rgba(60,200,255,0.03);
 }
 
 .icon-phone {
@@ -298,11 +318,12 @@ body {
 
 .contact-value {
     font-size: 0.9rem;
-    color: rgba(255,255,255,0.9);
+    color: rgba(200,230,255,0.9);
     font-weight: 400;
     display: block;
     line-height: 1.3;
     word-break: break-word;
+    text-shadow: 0 0 4px rgba(60,200,255,0.1);
 }
 
 .contact-value-sm {
@@ -340,27 +361,28 @@ body {
 }
 
 .btn-gold {
-    background: #d4ac4b;
-    color: #0f1420;
-    box-shadow: 0 0 20px rgba(212,172,75,0.3), 0 4px 16px rgba(212,172,75,0.15);
+    background: rgba(60,200,255,0.12);
+    color: #80d4ff;
+    border: 1.5px solid rgba(60,200,255,0.35);
+    box-shadow: 0 0 12px rgba(60,200,255,0.1), 0 0 24px rgba(60,200,255,0.05);
 }
 .btn-gold:hover {
-    background: #c49a3a;
+    background: rgba(60,200,255,0.2);
     transform: translateY(-2px);
-    box-shadow: 0 0 28px rgba(212,172,75,0.45), 0 8px 24px rgba(212,172,75,0.2);
-    color: #0f1420;
+    box-shadow: 0 0 18px rgba(60,200,255,0.18), 0 0 36px rgba(60,200,255,0.08);
+    color: #b0e4ff;
 }
 
 .btn-outline {
     background: transparent;
-    color: #d4ac4b;
-    border: 1.5px solid rgba(212,172,75,0.3);
+    color: rgba(60,200,255,0.8);
+    border: 1.5px solid rgba(60,200,255,0.25);
 }
 .btn-outline:hover {
-    background: rgba(212,172,75,0.1);
-    border-color: #d4ac4b;
+    background: rgba(60,200,255,0.08);
+    border-color: rgba(60,200,255,0.5);
     transform: translateY(-2px);
-    color: #d4ac4b;
+    color: #80d4ff;
 }
 
 .socials {
@@ -374,7 +396,7 @@ body {
     width: 60px;
     height: 60px;
     border-radius: 16px;
-    border: none;
+    border: 1px solid rgba(60,200,255,0.2);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -382,6 +404,8 @@ body {
     text-decoration: none;
     transition: all 0.3s ease;
     color: #fff;
+    background: rgba(60,140,240,0.06);
+    box-shadow: 0 0 8px rgba(60,200,255,0.05);
 }
 .social-link:hover {
     transform: translateY(-3px);
@@ -403,6 +427,7 @@ body {
     background: rgba(37,211,102,0.15);
     color: #25D366;
     border: 1.5px solid rgba(37,211,102,0.3);
+    box-shadow: 0 0 6px rgba(37,211,102,0.06);
 }
 .social-whatsapp:hover {
     background: #25D366;
@@ -414,6 +439,7 @@ body {
     background: rgba(225,48,108,0.15);
     color: #E1306C;
     border: 1.5px solid rgba(225,48,108,0.3);
+    box-shadow: 0 0 6px rgba(225,48,108,0.06);
 }
 .social-instagram:hover {
     background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
@@ -425,6 +451,7 @@ body {
     background: rgba(66,103,178,0.15);
     color: #4267B2;
     border: 1.5px solid rgba(66,103,178,0.3);
+    box-shadow: 0 0 6px rgba(66,103,178,0.06);
 }
 .social-facebook:hover {
     background: #4267B2;
@@ -435,7 +462,8 @@ body {
 .social-tiktok {
     background: rgba(60,140,240,0.08);
     color: #fff;
-    border: 1.5px solid rgba(60,140,240,0.15);
+    border: 1.5px solid rgba(60,200,255,0.25);
+    box-shadow: 0 0 6px rgba(60,200,255,0.06);
 }
 .social-tiktok:hover {
     background: #010101;
@@ -444,14 +472,12 @@ body {
     box-shadow: 0 0 20px rgba(37,244,238,0.4);
 }
 
-/* ── Footer (removed) ─────────────────────── */
-
 /* ═══════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════ */
 
 @media (max-width: 480px) {
-    .card { max-width: none; max-height: none; width: 95%; height: 95vh; height: 95dvh; border-radius: 30px; background: rgba(255,255,255,0.03); backdrop-filter: blur(50px) saturate(2); -webkit-backdrop-filter: blur(50px) saturate(2); }
+    .card { max-width: none; max-height: none; width: 95%; height: 95vh; height: 95dvh; border-radius: 30px; background: rgba(8,18,40,0.35); backdrop-filter: blur(35px) saturate(1.5); -webkit-backdrop-filter: blur(35px) saturate(1.5); }
     .card-top { padding: 18px 20px 6px; }
     .logo-k { width: 110px; height: 65px; margin: 3px auto; }
     .person-name { font-size: 1.05rem; margin-bottom: 3px; }
@@ -521,30 +547,10 @@ body {
     to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@keyframes boltFlash {
-    0%, 100% { opacity: 0; }
-    5% { opacity: 0.8; box-shadow: 0 0 30px rgba(100,180,255,0.6), 0 0 80px rgba(80,160,255,0.3); }
-    10% { opacity: 0; }
-    15% { opacity: 0.5; box-shadow: 0 0 20px rgba(100,180,255,0.3), 0 0 50px rgba(80,160,255,0.15); }
-    18% { opacity: 0; }
-    45% { opacity: 0; }
-    50% { opacity: 0.7; box-shadow: 0 0 25px rgba(120,200,255,0.5), 0 0 60px rgba(100,180,255,0.2); }
-    53% { opacity: 0; }
-    55% { opacity: 0.3; }
-    57% { opacity: 0; }
-}
-
-@keyframes lightningGlow {
-    0% { opacity: 0.3; }
-    30% { opacity: 0.8; }
-    32% { opacity: 0.2; }
-    35% { opacity: 0.9; }
-    37% { opacity: 0.3; }
-    60% { opacity: 0.4; }
-    65% { opacity: 1; }
-    67% { opacity: 0.2; }
-    70% { opacity: 0.7; }
-     100% { opacity: 0.4; }
+@keyframes neonPulse {
+    0% { opacity: 0.15; }
+    50% { opacity: 0.45; }
+    100% { opacity: 0.15; }
 }
 
 @keyframes logoFlash {
@@ -560,31 +566,36 @@ body {
     from { opacity: 0; transform: scale(0.8) rotate(-5deg); }
     to { opacity: 1; transform: scale(1) rotate(0deg); }
 }
+
+@keyframes borderGlow {
+    0% { border-color: rgba(60,200,255,0.3); }
+    50% { border-color: rgba(60,200,255,0.6); }
+    100% { border-color: rgba(60,200,255,0.3); }
+}
     </style>
 </head>
 <body>
 
+<canvas id="particles-canvas"></canvas>
+
 <div class="card">
-    <div class="geo geo-1"></div>
-    <div class="geo geo-2"></div>
-    <div class="geo geo-3"></div>
-    <div class="geo geo-4"></div>
+    <canvas id="card-particles-canvas"></canvas>
 
     <!-- Top: Logo + Name + Title (all in one section) -->
     <div class="card-top">
         <div class="logo-k"><img src="logo.jpg" alt="KAMCO Logo"></div>
-        <div class="person-name">Eng. Kareem Osama Ezz</div>
+        <div class="person-name">Eng . Kareem Osama Ezz</div>
         <span class="person-title">Deputy General Manager</span>
     </div>
-
-    <div class="divider"></div>
 
     <!-- Contacts (fills remaining space) -->
     <div class="contacts-wrapper">
 
+        <div class="divider"></div>
+
         <!-- Phone -->
         <div class="section-label label-phone">
-            Phones <i class="fas fa-phone-alt"></i>
+            Phone <i class="fas fa-phone-alt"></i>
         </div>
         <div class="contact-section">
             <div class="contact-row contact-row-static">
@@ -607,7 +618,7 @@ body {
 
         <!-- Email -->
         <div class="section-label label-email">
-            Emails <i class="fas fa-envelope"></i>
+            Email <i class="fas fa-envelope"></i>
         </div>
         <div class="contact-section">
             <a href="mailto:kamcoforcontrolandeletricalpo@gmail.com" class="contact-row">
@@ -665,6 +676,83 @@ body {
     </div>
 
 </div>
+
+<script>
+(function() {
+    var COLORS = [
+        'rgba(60,200,255,',
+        'rgba(100,160,255,',
+        'rgba(150,80,255,',
+        'rgba(0,220,200,',
+        'rgba(80,140,255,'
+    ];
+
+    function createParticleSystem(canvasId, count, speed, glow) {
+        var canvas = document.getElementById(canvasId);
+        var ctx = canvas.getContext('2d');
+        var W, H;
+        var particles = [];
+
+        function resize() {
+            W = canvas.width = canvas.parentElement.clientWidth;
+            H = canvas.height = canvas.parentElement.clientHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        function P() { this.reset(); }
+        P.prototype.reset = function() {
+            this.x = Math.random() * W;
+            this.y = Math.random() * H;
+            this.r = Math.random() * 2.5 + 0.8;
+            this.vx = (Math.random() - 0.5) * speed;
+            this.vy = (Math.random() - 0.5) * speed;
+            this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+            this.alpha = Math.random() * 0.55 + 0.1;
+            this.alphaDir = (Math.random() - 0.5) * 0.006;
+        };
+        P.prototype.update = function() {
+            this.x += this.vx;
+            this.y += this.vy;
+            this.alpha += this.alphaDir;
+            if (this.alpha <= 0.05 || this.alpha >= 0.6) this.alphaDir *= -1;
+            if (this.x < -10) this.x = W + 10;
+            if (this.x > W + 10) this.x = -10;
+            if (this.y < -10) this.y = H + 10;
+            if (this.y > H + 10) this.y = -10;
+        };
+        P.prototype.draw = function() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            ctx.fillStyle = this.color + this.alpha + ')';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r * glow, 0, Math.PI * 2);
+            ctx.fillStyle = this.color + (this.alpha * 0.18) + ')';
+            ctx.fill();
+        };
+
+        for (var i = 0; i < count; i++) particles.push(new P());
+
+        function animate() {
+            ctx.clearRect(0, 0, W, H);
+            for (var i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    }
+
+    var bgCount = Math.min(80, Math.floor((window.innerWidth * window.innerHeight) / 12000));
+    createParticleSystem('particles-canvas', bgCount, 0.4, 3);
+
+    var cardEl = document.querySelector('.card');
+    var cardCount = Math.min(30, Math.floor((cardEl.clientWidth * cardEl.clientHeight) / 10000));
+    createParticleSystem('card-particles-canvas', cardCount, 0.3, 3.5);
+})();
+</script>
 
 </body>
 </html>
