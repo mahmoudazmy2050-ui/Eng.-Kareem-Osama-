@@ -19,7 +19,7 @@ body {
     height: 100vh;
     height: 100dvh;
     font-family: 'Poppins', sans-serif;
-    background: #06101e;
+    background: #020610;
     overflow: hidden;
     padding: 0;
     margin: 0;
@@ -79,17 +79,17 @@ body {
     max-width: 420px;
     max-height: 780px;
     overflow: hidden;
-    background: rgba(8,18,40,0.25);
-    border: 1px solid rgba(80,160,255,0.15);
+    background: rgba(8,18,40,0.2);
+    border: 1px solid rgba(80,160,255,0.2);
     border-radius: 30px;
-    backdrop-filter: blur(32px) saturate(1.5);
-    -webkit-backdrop-filter: blur(32px) saturate(1.5);
+    backdrop-filter: blur(36px) saturate(1.6);
+    -webkit-backdrop-filter: blur(36px) saturate(1.6);
     box-shadow:
-        0 0 40px rgba(40,120,255,0.12),
-        0 0 80px rgba(40,120,255,0.06),
-        0 16px 48px rgba(0,0,0,0.35),
-        inset 0 1px 0 rgba(100,180,255,0.1),
-        inset 0 -1px 0 rgba(100,180,255,0.04);
+        0 0 60px rgba(40,120,255,0.15),
+        0 0 120px rgba(40,120,255,0.08),
+        0 16px 48px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(100,180,255,0.12),
+        inset 0 -1px 0 rgba(100,180,255,0.06);
     animation: fadeIn 0.8s ease forwards;
     display: flex;
     flex-direction: column;
@@ -138,6 +138,21 @@ body {
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 16px rgba(212,172,75,0.08);
+    position: relative;
+    overflow: hidden;
+}
+.logo-k::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    opacity: 0;
+    pointer-events: none;
+}
+.logo-k:hover::after {
+    background: rgba(255,255,255,0.15);
+    box-shadow: 0 0 40px rgba(255,255,255,0.3), 0 0 80px rgba(255,255,255,0.1);
+    animation: logoFlash 0.6s ease-out;
 }
 .logo-k img {
     width: 100%;
@@ -465,39 +480,40 @@ body {
    ═══════════════════════════════════════════ */
 
 @media (max-width: 480px) {
-    .card { max-width: none; max-height: none; border-radius: 0; background: rgba(8,18,40,0.25); backdrop-filter: blur(32px) saturate(1.5); -webkit-backdrop-filter: blur(32px) saturate(1.5); }
-    .card-top { padding: 22px 24px 8px; }
-    .logo-k { width: 120px; height: 70px; margin: 4px auto; }
-    .person-name { font-size: 1.1rem; margin-bottom: 6px; }
-    .person-title { font-size: 0.65rem; padding: 3px 12px; }
-    .section-label { padding: 3px 14px; font-size: 0.58rem; }
+    .card { max-width: none; max-height: none; border-radius: 0; background: rgba(8,18,40,0.2); backdrop-filter: blur(36px) saturate(1.6); -webkit-backdrop-filter: blur(36px) saturate(1.6); }
+    .card-top { padding: 16px 20px 6px; }
+    .logo-k { width: 110px; height: 65px; margin: 3px auto; }
+    .person-name { font-size: 1.05rem; margin-bottom: 4px; }
+    .person-title { font-size: 0.6rem; padding: 3px 12px; }
+    .section-label { padding: 3px 14px; font-size: 0.55rem; margin: 8px auto 3px; }
     .contact-section { padding: 0 12px 1px; }
-    .contact-row { padding: 6px 8px; gap: 10px; }
-    .contact-icon { width: 36px; height: 36px; min-width: 36px; font-size: 0.78rem; }
-    .contact-value { font-size: 0.82rem; }
-    .contact-value-sm { font-size: 0.7rem; }
-    .actions { padding: 4px 20px 12px; }
-    .btn { padding: 10px 12px; font-size: 0.8rem; }
-    .socials { padding: 10px 20px 8px; gap: 10px; }
-    .social-link { width: 52px; height: 52px; font-size: 1.35rem; border-radius: 14px; }
+    .contact-row { padding: 5px 8px; gap: 10px; }
+    .contact-icon { width: 34px; height: 34px; min-width: 34px; font-size: 0.75rem; }
+    .contact-value { font-size: 0.8rem; }
+    .contact-value-sm { font-size: 0.68rem; }
+    .divider { margin: 0 20px; }
+    .actions { padding: 3px 20px 10px; }
+    .btn { padding: 9px 12px; font-size: 0.78rem; }
+    .socials { padding: 8px 20px 6px; gap: 8px; }
+    .social-link { width: 48px; height: 48px; font-size: 1.25rem; border-radius: 12px; }
 }
 
 @media (max-width: 359px) {
-    .card-top { padding: 18px 18px 6px; }
-    .logo-k { width: 100px; height: 60px; margin: 4px auto; }
-    .person-name { font-size: 1rem; }
-    .person-title { font-size: 0.6rem; padding: 3px 10px; }
-    .divider { margin: 0 18px; }
-    .section-label { padding: 3px 12px; font-size: 0.52rem; }
-    .contact-section { padding: 0 10px 1px; }
-    .contact-row { padding: 5px 6px; gap: 8px; }
-    .contact-icon { width: 32px; height: 32px; min-width: 32px; font-size: 0.72rem; border-radius: 8px; }
-    .contact-value { font-size: 0.78rem; }
-    .contact-value-sm { font-size: 0.66rem; }
-    .actions { padding: 3px 16px 12px; }
-    .btn { padding: 9px 10px; font-size: 0.75rem; }
-    .socials { padding: 10px 16px 7px; gap: 8px; }
-    .social-link { width: 46px; height: 46px; font-size: 1.15rem; border-radius: 12px; }
+    .card-top { padding: 14px 14px 4px; }
+    .logo-k { width: 90px; height: 55px; margin: 2px auto; }
+    .person-name { font-size: 0.92rem; margin-bottom: 3px; }
+    .person-title { font-size: 0.55rem; padding: 2px 10px; }
+    .divider { margin: 0 14px; }
+    .section-label { padding: 2px 10px; font-size: 0.48rem; margin: 6px auto 2px; }
+    .contact-section { padding: 0 8px 1px; }
+    .contact-row { padding: 4px 6px; gap: 7px; }
+    .contact-icon { width: 28px; height: 28px; min-width: 28px; font-size: 0.65rem; border-radius: 7px; }
+    .contact-value { font-size: 0.72rem; }
+    .contact-value-sm { font-size: 0.62rem; }
+    .actions { padding: 2px 14px 8px; }
+    .btn { padding: 8px 10px; font-size: 0.7rem; }
+    .socials { padding: 6px 14px 5px; gap: 6px; }
+    .social-link { width: 40px; height: 40px; font-size: 1.05rem; border-radius: 10px; }
 }
 
 @media (max-height: 700px) {
@@ -563,7 +579,21 @@ body {
     65% { opacity: 1; }
     67% { opacity: 0.2; }
     70% { opacity: 0.7; }
-    100% { opacity: 0.4; }
+     100% { opacity: 0.4; }
+}
+
+@keyframes logoFlash {
+    0% { opacity: 0; background: rgba(255,255,255,0); }
+    20% { opacity: 1; background: rgba(255,255,255,0.25); }
+    40% { opacity: 0.3; background: rgba(255,255,255,0.08); }
+    60% { opacity: 0.8; background: rgba(255,255,255,0.15); }
+    80% { opacity: 0.1; background: rgba(255,255,255,0.03); }
+    100% { opacity: 0; background: rgba(255,255,255,0); }
+}
+
+@keyframes logoEntrance {
+    from { opacity: 0; transform: scale(0.8) rotate(-5deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
 }
     </style>
 </head>
@@ -590,7 +620,7 @@ body {
 
         <!-- Phone -->
         <div class="section-label label-phone">
-            Phone <i class="fas fa-phone-alt"></i>
+            Phones <i class="fas fa-phone-alt"></i>
         </div>
         <div class="contact-section">
             <div class="contact-row contact-row-static">
@@ -612,7 +642,7 @@ body {
 
         <!-- Email -->
         <div class="section-label label-email">
-            Email <i class="fas fa-envelope"></i>
+            Emails <i class="fas fa-envelope"></i>
         </div>
         <div class="contact-section">
             <a href="mailto:kamcoforcontrolandeletricalpo@gmail.com" class="contact-row">
