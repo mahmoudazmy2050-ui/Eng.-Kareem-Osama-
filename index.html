@@ -16,11 +16,10 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    height: 100vh;
-    height: 100dvh;
+    min-height: 100vh;
+    min-height: 100dvh;
     font-family: 'Poppins', sans-serif;
     background: #020610;
-    overflow: hidden;
     padding: 0;
     margin: 0;
     display: flex;
@@ -29,43 +28,104 @@ body {
 }
 
 /* ── Background ───────────────────────────── */
-.bg {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(180deg, #020610 0%, #040c1e 30%, #06142e 60%, #030a18 100%);
-    z-index: 0;
-}
-.bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(ellipse 80% 50% at 50% 100%, rgba(8,30,60,0.6) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(15,45,90,0.35) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 30% at 80% 70%, rgba(10,40,80,0.3) 0%, transparent 60%);
-    animation: waterFlow 8s ease-in-out infinite alternate;
-}
-.bg::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 200%;
-    height: 100%;
-    background:
-        radial-gradient(ellipse 40% 20% at 30% 90%, rgba(20,55,110,0.25) 0%, transparent 70%),
-        radial-gradient(ellipse 35% 15% at 70% 85%, rgba(12,45,90,0.2) 0%, transparent 70%);
-    animation: waterShimmer 6s ease-in-out infinite alternate-reverse;
-}
 
+/* ═══════════════════════════════════════════
 .geo {
     position: absolute;
-    border: 1.5px solid rgba(60,120,200,0.08);
-    border-radius: 20px;
-    animation: geoFloat 10s ease-in-out infinite alternate;
+    border-radius: 2px;
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
 }
-.geo-1 { width: 300px; height: 300px; top: -80px; left: -60px; transform: rotate(25deg); animation-duration: 10s; }
-.geo-2 { width: 200px; height: 200px; bottom: -40px; right: -30px; transform: rotate(-15deg); animation-duration: 8s; animation-delay: -3s; }
+.geo-1 {
+    width: 3px; height: 60px;
+    top: 10%; left: 20%;
+    background: rgba(150,200,255,0.6);
+    box-shadow: 0 0 20px rgba(100,180,255,0.4), 0 0 60px rgba(80,160,255,0.2);
+    transform: skewX(-15deg);
+    animation: boltFlash 3s ease-in-out infinite;
+}
+.geo-1::before {
+    content: '';
+    position: absolute;
+    top: -8px; left: -4px;
+    width: 11px; height: 11px;
+    background: rgba(180,220,255,0.8);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(100,200,255,0.6);
+}
+.geo-1::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: -2px;
+    width: 7px; height: 7px;
+    background: rgba(150,210,255,0.6);
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(100,200,255,0.4);
+}
+
+.geo-2 {
+    width: 2.5px; height: 80px;
+    bottom: 15%; right: 25%;
+    background: rgba(120,190,255,0.5);
+    box-shadow: 0 0 25px rgba(80,170,255,0.3), 0 0 50px rgba(60,150,255,0.15);
+    transform: skewX(20deg);
+    animation: boltFlash 4s ease-in-out infinite 1.5s;
+}
+.geo-2::before {
+    content: '';
+    position: absolute;
+    top: -6px; left: -3px;
+    width: 8.5px; height: 8.5px;
+    background: rgba(160,220,255,0.7);
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(100,200,255,0.5);
+}
+
+.geo-3 {
+    width: 2px; height: 50px;
+    top: 40%; left: 75%;
+    background: rgba(130,200,255,0.5);
+    box-shadow: 0 0 18px rgba(80,180,255,0.3), 0 0 40px rgba(60,160,255,0.12);
+    transform: skewX(-25deg);
+    animation: boltFlash 3.5s ease-in-out infinite 0.8s;
+}
+.geo-3::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: -3px;
+    width: 8px; height: 8px;
+    background: rgba(180,230,255,0.8);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(120,210,255,0.5);
+}
+.geo-3::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: -1px;
+    width: 4px; height: 4px;
+    background: rgba(140,210,255,0.5);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(100,200,255,0.3);
+}
+
+.geo-4 {
+    width: 2px; height: 45px;
+    top: 60%; left: 15%;
+    background: rgba(110,185,255,0.4);
+    box-shadow: 0 0 15px rgba(70,170,255,0.25), 0 0 35px rgba(50,150,255,0.1);
+    transform: skewX(15deg);
+    animation: boltFlash 2.8s ease-in-out infinite 2s;
+}
+.geo-4::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: -2px;
+    width: 6px; height: 6px;
+    background: rgba(170,225,255,0.7);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(110,210,255,0.4);
+}
 
 /* ═══════════════════════════════════════════
    CARD
@@ -73,17 +133,17 @@ body {
 .card {
     position: relative;
     z-index: 2;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
+    width: 95%;
+    height: 95vh;
+    height: 95dvh;
     max-width: 420px;
     max-height: 780px;
     overflow: hidden;
-    background: rgba(8,18,40,0.2);
-    border: 1px solid rgba(80,160,255,0.2);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(80,160,255,0.15);
     border-radius: 30px;
-    backdrop-filter: blur(36px) saturate(1.6);
-    -webkit-backdrop-filter: blur(36px) saturate(1.6);
+    backdrop-filter: blur(50px) saturate(2);
+    -webkit-backdrop-filter: blur(50px) saturate(2);
     box-shadow:
         0 0 60px rgba(40,120,255,0.15),
         0 0 120px rgba(40,120,255,0.08),
@@ -126,7 +186,7 @@ body {
     border-bottom: 1px solid rgba(60,140,240,0.08);
     flex-shrink: 0;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .logo-k {
@@ -201,7 +261,7 @@ body {
     flex-direction: column;
     overflow: hidden;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .section-label {
@@ -261,9 +321,10 @@ body {
 }
 
 .contact-sep {
-    color: rgba(255,255,255,0.15);
-    font-size: 0.85rem;
+    color: #25D366;
+    font-size: 0.9rem;
     font-weight: 300;
+    opacity: 0.6;
 }
 
 .contact-row {
@@ -350,11 +411,11 @@ body {
 .card-bottom {
     flex-shrink: 0;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .actions {
-    padding: 6px 24px 8px;
+    padding: 4px 24px 16px;
     display: flex;
     justify-content: center;
 }
@@ -402,10 +463,10 @@ body {
 }
 
 .socials {
-    padding: 4px 24px 10px;
+    padding: 8px 24px 6px;
     display: flex;
     justify-content: center;
-    gap: 14px;
+    gap: 16px;
 }
 
 .social-link {
@@ -489,42 +550,42 @@ body {
    ═══════════════════════════════════════════ */
 
 @media (max-width: 480px) {
-    .card { max-width: none; max-height: none; border-radius: 0; background: rgba(8,18,40,0.2); backdrop-filter: blur(36px) saturate(1.6); -webkit-backdrop-filter: blur(36px) saturate(1.6); }
-    .card-top { padding: 16px 20px 4px; }
-    .logo-k { width: 110px; height: 65px; margin: 2px auto; }
-    .person-name { font-size: 1.05rem; margin-bottom: 2px; }
+    .card { max-width: none; max-height: none; width: 95%; height: 95vh; height: 95dvh; border-radius: 30px; background: rgba(255,255,255,0.03); backdrop-filter: blur(50px) saturate(2); -webkit-backdrop-filter: blur(50px) saturate(2); }
+    .card-top { padding: 18px 20px 6px; }
+    .logo-k { width: 110px; height: 65px; margin: 3px auto; }
+    .person-name { font-size: 1.05rem; margin-bottom: 3px; }
     .person-title { font-size: 0.6rem; padding: 3px 12px; }
-    .section-label { padding: 3px 14px; font-size: 0.55rem; margin: 6px auto 2px; }
-    .contact-section { padding: 0 12px 0; }
-    .contact-row { padding: 4px 8px; gap: 10px; }
-    .contact-icon { width: 34px; height: 34px; min-width: 34px; font-size: 0.75rem; }
-    .contact-value { font-size: 0.8rem; }
+    .section-label { padding: 3px 16px; font-size: 0.55rem; margin: 8px auto 3px; }
+    .contact-section { padding: 0 12px 2px; }
+    .contact-row { padding: 5px 10px; gap: 10px; }
+    .contact-icon { width: 36px; height: 36px; min-width: 36px; font-size: 0.78rem; }
+    .contact-value { font-size: 0.82rem; }
     .divider { margin: 0 20px; }
-    .actions { padding: 2px 20px 4px; }
-    .btn { padding: 9px 12px; font-size: 0.78rem; }
-    .socials { padding: 2px 20px 6px; gap: 8px; }
-    .social-link { width: 48px; height: 48px; font-size: 1.25rem; border-radius: 12px; }
+    .actions { padding: 4px 20px 14px; }
+    .btn { padding: 10px 14px; font-size: 0.8rem; }
+    .socials { padding: 6px 20px 4px; gap: 12px; }
+    .social-link { width: 50px; height: 50px; font-size: 1.3rem; border-radius: 14px; }
 }
 
 @media (max-width: 359px) {
-    .card-top { padding: 12px 14px 2px; }
+    .card-top { padding: 14px 14px 4px; }
     .logo-k { width: 90px; height: 55px; margin: 2px auto; }
     .person-name { font-size: 0.92rem; margin-bottom: 2px; }
     .person-title { font-size: 0.55rem; padding: 2px 10px; }
-    .section-label { padding: 2px 10px; font-size: 0.48rem; margin: 4px auto 2px; }
-    .contact-section { padding: 0 8px 0; }
-    .contact-row { padding: 3px 6px; gap: 7px; }
-    .contact-icon { width: 28px; height: 28px; min-width: 28px; font-size: 0.65rem; border-radius: 7px; }
-    .contact-value { font-size: 0.72rem; }
+    .section-label { padding: 2px 12px; font-size: 0.48rem; margin: 6px auto 2px; }
+    .contact-section { padding: 0 8px 1px; }
+    .contact-row { padding: 4px 8px; gap: 8px; }
+    .contact-icon { width: 30px; height: 30px; min-width: 30px; font-size: 0.68rem; border-radius: 8px; }
+    .contact-value { font-size: 0.74rem; }
     .divider { margin: 0 14px; }
-    .actions { padding: 2px 14px 2px; }
-    .btn { padding: 8px 10px; font-size: 0.7rem; }
-    .socials { padding: 2px 14px 4px; gap: 6px; }
-    .social-link { width: 40px; height: 40px; font-size: 1.05rem; border-radius: 10px; }
+    .actions { padding: 3px 14px 12px; }
+    .btn { padding: 8px 12px; font-size: 0.72rem; }
+    .socials { padding: 4px 14px 3px; gap: 8px; }
+    .social-link { width: 42px; height: 42px; font-size: 1.1rem; border-radius: 10px; }
 }
 
 @media (max-height: 700px) {
-    .card-top { padding: 12px 24px 4px; }
+    .card-top { padding: 14px 24px 4px; }
     .logo-k { width: 110px; height: 65px; margin: 2px auto; }
     .person-name { font-size: 1.05rem; margin-bottom: 2px; }
     .person-title { font-size: 0.62rem; padding: 3px 12px; }
@@ -532,26 +593,25 @@ body {
     .contact-row { padding: 4px 8px; }
     .contact-icon { width: 34px; height: 34px; min-width: 34px; font-size: 0.75rem; }
     .contact-value { font-size: 0.82rem; }
-    .actions { padding: 2px 22px 4px; }
-    .btn { padding: 9px 12px; font-size: 0.8rem; }
-    .socials { padding: 2px 22px 6px; }
-    .social-link { width: 48px; height: 48px; font-size: 1.25rem; }
+    .actions { padding: 3px 22px 12px; }
+    .btn { padding: 9px 12px; font-size: 0.78rem; }
+    .socials { padding: 4px 22px 4px; gap: 10px; }
+    .social-link { width: 46px; height: 46px; font-size: 1.2rem; }
 }
 
 @media (max-height: 580px) {
-    .card-top { padding: 8px 20px 2px; }
+    .card-top { padding: 10px 20px 3px; }
     .logo-k { width: 90px; height: 55px; margin: 2px auto; }
     .person-name { font-size: 0.92rem; margin-bottom: 2px; }
     .person-title { font-size: 0.55rem; padding: 2px 10px; }
-    .section-label { padding: 2px 12px; font-size: 0.5rem; margin: 4px auto 2px; }
-    .contact-section { padding: 0 8px 0; }
+    .section-label { padding: 2px 12px; font-size: 0.48rem; margin: 4px auto 2px; }
+    .contact-section { padding: 0 8px 1px; }
     .contact-row { padding: 3px 6px; gap: 6px; }
     .contact-icon { width: 28px; height: 28px; min-width: 28px; font-size: 0.65rem; border-radius: 7px; }
-    .contact-value { font-size: 0.74rem; }
-    .contact-value-sm { font-size: 0.62rem; }
-    .actions { padding: 1px 18px 2px; gap: 6px; }
-    .btn { padding: 7px 10px; font-size: 0.72rem; }
-    .socials { padding: 2px 18px 4px; gap: 6px; }
+    .contact-value { font-size: 0.72rem; }
+    .actions { padding: 2px 18px 10px; gap: 6px; }
+    .btn { padding: 8px 10px; font-size: 0.72rem; }
+    .socials { padding: 3px 18px 3px; gap: 8px; }
     .social-link { width: 40px; height: 40px; font-size: 1.05rem; }
 }
 
@@ -560,19 +620,17 @@ body {
     to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@keyframes geoFloat {
-    0% { transform: rotate(25deg) translate(0, 0); opacity: 0.4; }
-    100% { transform: rotate(35deg) translate(15px, -10px); opacity: 0.8; }
-}
-
-@keyframes waterFlow {
-    0% { transform: translateX(0) translateY(0); }
-    100% { transform: translateX(-3%) translateY(-2%); }
-}
-
-@keyframes waterShimmer {
-    0% { transform: translateX(0); opacity: 0.6; }
-    100% { transform: translateX(-5%); opacity: 1; }
+@keyframes boltFlash {
+    0%, 100% { opacity: 0; }
+    5% { opacity: 0.8; box-shadow: 0 0 30px rgba(100,180,255,0.6), 0 0 80px rgba(80,160,255,0.3); }
+    10% { opacity: 0; }
+    15% { opacity: 0.5; box-shadow: 0 0 20px rgba(100,180,255,0.3), 0 0 50px rgba(80,160,255,0.15); }
+    18% { opacity: 0; }
+    45% { opacity: 0; }
+    50% { opacity: 0.7; box-shadow: 0 0 25px rgba(120,200,255,0.5), 0 0 60px rgba(100,180,255,0.2); }
+    53% { opacity: 0; }
+    55% { opacity: 0.3; }
+    57% { opacity: 0; }
 }
 
 @keyframes lightningGlow {
@@ -605,12 +663,11 @@ body {
 </head>
 <body>
 
-<div class="bg">
+<div class="card">
     <div class="geo geo-1"></div>
     <div class="geo geo-2"></div>
-</div>
-
-<div class="card">
+    <div class="geo geo-3"></div>
+    <div class="geo geo-4"></div>
 
     <!-- Top: Logo + Name + Title (all in one section) -->
     <div class="card-top">
@@ -685,7 +742,6 @@ body {
 
     <!-- Bottom: Socials + Button -->
     <div class="card-bottom">
-        <div class="divider"></div>
         <div class="socials">
             <a href="https://wa.me/201000729175" target="_blank" rel="noopener noreferrer" class="social-link social-whatsapp" aria-label="WhatsApp">
                 <i class="fab fa-whatsapp"></i>
