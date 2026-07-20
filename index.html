@@ -246,17 +246,24 @@ body {
     transition: all 0.25s ease;
 }
 
-.contact-info-stacked {
+.contact-info-duo {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    align-items: center;
+    gap: 10px;
 }
-.contact-info-stacked .contact-value {
+.contact-info-duo .contact-value {
     text-decoration: none;
     transition: all 0.2s ease;
+    white-space: nowrap;
 }
-.contact-info-stacked .contact-value:hover {
+.contact-info-duo .contact-value:hover {
     color: #25D366;
+}
+
+.contact-sep {
+    color: rgba(255,255,255,0.15);
+    font-size: 0.85rem;
+    font-weight: 300;
 }
 
 .contact-row {
@@ -624,8 +631,9 @@ body {
         <div class="contact-section">
             <div class="contact-row contact-row-static">
                 <div class="contact-icon icon-phone"><i class="fas fa-mobile-alt"></i></div>
-                <div class="contact-info contact-info-stacked">
+                <div class="contact-info contact-info-duo">
                     <a href="tel:01000729175" class="contact-value">010 0072 9175</a>
+                    <span class="contact-sep">|</span>
                     <a href="tel:01060116936" class="contact-value">010 6011 6936</a>
                 </div>
             </div>
